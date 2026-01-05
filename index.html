@@ -5,13 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mynder - Journaling App</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/dexie@3.2.4/dist/dexie.min.js"></script>
 </head>
 <body>
-    <div class="container">
+    <!-- Password Lock Screen -->
+    <div id="lock-screen" class="lock-screen">
+        <div class="lock-container">
+            <h1>🔒 Mynder</h1>
+            <p class="lock-subtitle">Secure Personal Journal</p>
+            <div id="setup-password" class="password-form">
+                <h3>Set Your Password</h3>
+                <p class="info-text">Create a password to encrypt your data. <strong>Don't forget it!</strong> Your data cannot be recovered without it.</p>
+                <input type="password" id="new-password" placeholder="Create password" />
+                <input type="password" id="confirm-password" placeholder="Confirm password" />
+                <button id="setup-btn" class="btn-primary">Set Password</button>
+            </div>
+            <div id="unlock-password" class="password-form" style="display: none;">
+                <h3>Welcome Back</h3>
+                <p class="info-text">Enter your password to unlock your journal</p>
+                <input type="password" id="unlock-password-input" placeholder="Enter password" />
+                <button id="unlock-btn" class="btn-primary">Unlock</button>
+                <div id="unlock-error" class="error-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="display: none;">
         <header>
-            <h1>Mynder</h1>
-            <p class="subtitle">Your Personal Journal & Task Manager</p>
+            <div class="header-content">
+                <div>
+                    <h1>Mynder</h1>
+                    <p class="subtitle">Your Personal Journal & Task Manager</p>
+                </div>
+                <button id="lock-app-btn" class="lock-btn" title="Lock App">🔒</button>
+            </div>
         </header>
+
+        <!-- Mini Calendar Widget -->
+        <div class="mini-calendar">
+            <div class="calendar-header">
+                <button class="calendar-nav" id="prev-month">‹</button>
+                <div class="calendar-month-year" id="current-month-year"></div>
+                <button class="calendar-nav" id="next-month">›</button>
+            </div>
+            <div class="calendar-weekdays">
+                <div class="weekday">Sun</div>
+                <div class="weekday">Mon</div>
+                <div class="weekday">Tue</div>
+                <div class="weekday">Wed</div>
+                <div class="weekday">Thu</div>
+                <div class="weekday">Fri</div>
+                <div class="weekday">Sat</div>
+            </div>
+            <div class="calendar-grid" id="calendar-grid">
+                <!-- Calendar days will be generated here -->
+            </div>
+        </div>
 
         <nav class="tabs">
             <button class="tab-btn active" data-tab="journal">Journal</button>
