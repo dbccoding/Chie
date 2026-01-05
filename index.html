@@ -16,19 +16,95 @@
         <div class="lock-container">
             <h1>🔒 Mynder</h1>
             <p class="lock-subtitle">Secure Personal Journal</p>
-            <div id="setup-password" class="password-form">
-                <h3>Set Your Password</h3>
-                <p class="info-text">Create a password to encrypt your data. <strong>Don't forget it!</strong> Your data cannot be recovered without it.</p>
-                <input type="password" id="new-password" placeholder="Create password" />
-                <input type="password" id="confirm-password" placeholder="Confirm password" />
-                <button id="setup-btn" class="btn-primary">Set Password</button>
+            
+            <!-- Onboarding Step 1: Welcome -->
+            <div id="onboarding-welcome" class="password-form" style="display: none;">
+                <h3>Welcome to Mynder</h3>
+                <p class="info-text">Mynder keeps your journal entries, tasks, and events secure with military-grade encryption. Your data never leaves your device.</p>
+                <p class="info-text">Let's set up your secure account in 3 quick steps.</p>
+                <button id="start-onboarding-btn" class="btn-primary">Get Started</button>
             </div>
+
+            <!-- Onboarding Step 2: Set Password -->
+            <div id="onboarding-password" class="password-form" style="display: none;">
+                <div class="onboarding-progress">
+                    <span class="progress-step active">1</span>
+                    <span class="progress-line"></span>
+                    <span class="progress-step">2</span>
+                    <span class="progress-line"></span>
+                    <span class="progress-step">3</span>
+                </div>
+                <h3>Create Your Password</h3>
+                <p class="info-text">Choose a strong password. You'll use this to access your journal.</p>
+                <input type="password" id="new-password" placeholder="Create password (min 6 characters)" />
+                <input type="password" id="confirm-password" placeholder="Confirm password" />
+                <div class="button-group">
+                    <button id="password-next-btn" class="btn-primary">Next</button>
+                </div>
+            </div>
+
+            <!-- Onboarding Step 3: Recovery Key -->
+            <div id="onboarding-recovery" class="password-form" style="display: none;">
+                <div class="onboarding-progress">
+                    <span class="progress-step complete">✓</span>
+                    <span class="progress-line complete"></span>
+                    <span class="progress-step active">2</span>
+                    <span class="progress-line"></span>
+                    <span class="progress-step">3</span>
+                </div>
+                <h3>Save Your Recovery Key</h3>
+                <p class="info-text"><strong>Important:</strong> If you forget your password, this recovery key is the ONLY way to access your data. Save it somewhere safe.</p>
+                <div class="recovery-key-box">
+                    <div id="recovery-key-display" class="recovery-key"></div>
+                    <div class="recovery-actions">
+                        <button id="copy-recovery-btn" class="btn-secondary">Copy to Clipboard</button>
+                        <button id="download-recovery-btn" class="btn-secondary">Download as Text</button>
+                    </div>
+                </div>
+                <div class="warning-box">
+                    ⚠️ Write this down or save it in a password manager. Do not lose it!
+                </div>
+                <div class="button-group">
+                    <button id="recovery-next-btn" class="btn-primary">I've Saved It</button>
+                </div>
+            </div>
+
+            <!-- Onboarding Step 4: Confirm Recovery Key -->
+            <div id="onboarding-confirm" class="password-form" style="display: none;">
+                <div class="onboarding-progress">
+                    <span class="progress-step complete">✓</span>
+                    <span class="progress-line complete"></span>
+                    <span class="progress-step complete">✓</span>
+                    <span class="progress-line complete"></span>
+                    <span class="progress-step active">3</span>
+                </div>
+                <h3>Verify Recovery Key</h3>
+                <p class="info-text">To make sure you saved it correctly, please enter your recovery key:</p>
+                <textarea id="confirm-recovery-input" placeholder="Paste or type your recovery key here" rows="3"></textarea>
+                <div class="button-group">
+                    <button id="back-to-recovery-btn" class="btn-secondary">Back</button>
+                    <button id="confirm-recovery-btn" class="btn-primary">Confirm & Finish</button>
+                </div>
+            </div>
+
+            <!-- Unlock with Password -->
             <div id="unlock-password" class="password-form" style="display: none;">
                 <h3>Welcome Back</h3>
                 <p class="info-text">Enter your password to unlock your journal</p>
                 <input type="password" id="unlock-password-input" placeholder="Enter password" />
                 <button id="unlock-btn" class="btn-primary">Unlock</button>
+                <button id="show-recovery-option-btn" class="btn-text">Forgot password? Use recovery key</button>
                 <div id="unlock-error" class="error-message"></div>
+            </div>
+
+            <!-- Unlock with Recovery Key -->
+            <div id="unlock-recovery" class="password-form" style="display: none;">
+                <h3>Recover Access</h3>
+                <p class="info-text">Enter your recovery key to regain access to your journal</p>
+                <textarea id="recovery-key-input" placeholder="Enter your recovery key" rows="3"></textarea>
+                <button id="unlock-recovery-btn" class="btn-primary">Unlock with Recovery Key</button>
+                <button id="back-to-password-btn" class="btn-text">Back to password</button>
+                <div id="recovery-unlock-error" class="error-message"></div>
             </div>
         </div>
     </div>
@@ -41,6 +117,11 @@
                     <p class="subtitle">Your Personal Journal & Task Manager</p>
                 </div>
                 <div class="header-actions">
+                    <label class="mood-ring-toggle" title="Toggle mood-based background colors">
+                        <input type="checkbox" id="mood-ring-toggle" checked>
+                        <span class="toggle-slider"></span>
+                        <span class="toggle-label">Mood Ring</span>
+                    </label>
                     <button id="install-app-btn" class="install-btn" style="display: none;" title="Install App">Install</button>
                     <button id="lock-app-btn" class="lock-btn" title="Lock App">🔒</button>
                 </div>
@@ -53,6 +134,7 @@
                 <button class="calendar-nav" id="prev-month">‹</button>
                 <div class="calendar-month-year" id="current-month-year"></div>
                 <button class="calendar-nav" id="next-month">›</button>
+                <button class="calendar-toggle" id="calendar-toggle" title="Collapse/Expand Calendar">▼</button>
             </div>
             <div class="calendar-weekdays">
                 <div class="weekday">Sun</div>

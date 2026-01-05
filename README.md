@@ -2,8 +2,6 @@
 
 A secure, lightweight journaling app that helps you capture daily thoughts, manage tasks, and organize events with military-grade encryption.
 
-Mynder is 100% local. Your thoughts and feelings never leave your device. Only you can access your journal. All data is encrypted before it's stored. No data is sent to external servers. No one is trying to get inside your head. It's just you and your Mynder. 
-
 ## Features
 
 - **Progressive Web App**: Install on desktop or mobile devices for native app experience
@@ -26,12 +24,24 @@ Mynder is 100% local. Your thoughts and feelings never leave your device. Only y
 
 ### Getting Started
 
+**First Time Setup:**
+
 1. Open `index.html` in your web browser
-2. On first launch, create a password (minimum 6 characters)
-   - WARNING: Password cannot be recovered. If forgotten, all data is permanently inaccessible
-   - Store your password securely
-3. The app will automatically migrate any existing localStorage data and encrypt it
-4. The app will request notification permissions (optional, but recommended for event reminders)
+2. Click "Get Started" on the welcome screen
+3. **Step 1 - Create Password**: Choose a strong password (minimum 6 characters)
+4. **Step 2 - Save Recovery Key**: A unique recovery key will be generated
+   - CRITICAL: Copy or download this key and store it securely
+   - This is your only backup if you forget your password
+   - Write it down, save in password manager, or print it
+5. **Step 3 - Verify Recovery Key**: Enter the recovery key to confirm you saved it
+6. Setup complete - your journal is now secured with encryption
+
+**Recovery Key Important Notes:**
+- The recovery key is a 12-word phrase (e.g., "alpha-bravo-charlie-delta...")
+- Store it separately from your password
+- Anyone with this key can access your data
+- Keep it as secure as your password
+- You cannot change it after setup
 
 ### Installing as PWA
 
@@ -59,6 +69,16 @@ The app can be installed as a Progressive Web App:
 - Click the lock button in the header to manually lock the app
 - When locked, all data is cleared from memory and the encryption key is destroyed
 - Enter your password to unlock and access your data again
+- **Forgot Password?** Click "Use recovery key" and enter your 12-word recovery key
+
+### If You Forget Your Password
+
+Don't panic! You have a recovery option:
+
+1. On the unlock screen, click "Forgot password? Use recovery key"
+2. Enter your 12-word recovery key
+3. You'll regain full access to your encrypted data
+4. Consider setting a new password you'll remember better
 
 ### Mini Calendar
 
@@ -111,16 +131,32 @@ The app automatically checks:
 
 - **AES-GCM 256-bit encryption**: Military-grade encryption for all stored data
 - **PBKDF2 key derivation**: Password is hashed with 100,000 iterations
+- **Master key architecture**: A random master key encrypts your data, which is itself encrypted with both your password and recovery key
 - **Unique IVs**: Each encrypted item uses a unique initialization vector
 - **No plain text storage**: All journals, tasks, and events are encrypted before being saved
 
 ### Password System
 
-- Password is required to access the app
-- Encryption key derived from your password
+- Password required to access the app
+- Master encryption key derived from your password
 - Password hash stored separately for verification
 - Encryption key exists only in memory while app is unlocked
 - When locked, encryption key is completely wiped from memory
+
+### Recovery Key System
+
+- 12-word recovery phrase generated during setup
+- Provides emergency access if password is forgotten
+- Master key is encrypted with both password AND recovery key
+- Recovery key uses same encryption strength as password
+- Must be stored securely by user
+
+**Recovery Key Best Practices:**
+- Write it down on paper and store in a safe place
+- Save in a password manager
+- Never share it with anyone
+- Don't store it in the same place as your password
+- Consider printing multiple copies for redundancy
 
 ### Data Storage
 
@@ -131,11 +167,13 @@ The app automatically checks:
 
 ### Important Security Notes
 
-- Password is NOT recoverable - if you forget it, your data is permanently lost
-- Write down your password and store it securely
-- No backdoor or master key exists
-- Data cannot be accessed without the correct password
+- Password is NOT stored anywhere - only a hash for verification
+- Recovery key provides secure backup access
+- Your data can be recovered with EITHER password OR recovery key
+- Both must be kept secure - anyone with either can access your data
+- Master encryption key is never stored unencrypted
 - Encryption key is never stored on disk
+- All cryptographic operations use Web Crypto API (browser's built-in security)
 
 ## Technical Details
 
