@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mynder - Journaling App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Mynder</h1>
+            <p class="subtitle">Your Personal Journal & Task Manager</p>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-btn active" data-tab="journal">Journal</button>
+            <button class="tab-btn" data-tab="tasks">Tasks</button>
+            <button class="tab-btn" data-tab="calendar">Calendar</button>
+        </nav>
+
+        <!-- Journal Tab -->
+        <div id="journal" class="tab-content active">
+            <div class="journal-section">
+                <h2>Today's Journal</h2>
+                <div class="journal-form">
+                    <input type="text" id="journal-title" placeholder="Entry title (optional)" />
+                    <textarea id="journal-entry" placeholder="Write your thoughts here..." rows="6"></textarea>
+                    <button id="add-journal-btn" class="btn-primary">Add Entry</button>
+                </div>
+                <div id="journal-entries" class="entries-list">
+                    <!-- Journal entries will be displayed here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Tasks Tab -->
+        <div id="tasks" class="tab-content">
+            <div class="tasks-section">
+                <h2>Tasks & To-Do Lists</h2>
+                <div class="task-form">
+                    <input type="text" id="task-input" placeholder="Add a new task..." />
+                    <button id="add-task-btn" class="btn-primary">Add Task</button>
+                </div>
+                <div id="task-list" class="task-list">
+                    <!-- Tasks will be displayed here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Calendar Tab -->
+        <div id="calendar" class="tab-content">
+            <div class="calendar-section">
+                <h2>Events Calendar</h2>
+                <div class="event-form">
+                    <input type="text" id="event-title" placeholder="Event title" />
+                    <input type="datetime-local" id="event-date" />
+                    <textarea id="event-description" placeholder="Event description (optional)" rows="2"></textarea>
+                    <button id="add-event-btn" class="btn-primary">Add Event</button>
+                </div>
+                <div id="events-list" class="events-list">
+                    <!-- Events will be displayed here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
