@@ -4,6 +4,8 @@ A secure, lightweight journaling app that helps you capture daily thoughts, mana
 
 ## Features
 
+- **Progressive Web App**: Install on desktop or mobile devices for native app experience
+- **Offline Support**: Full functionality works offline via service worker caching
 - **Mini Calendar Widget**: Compact monthly calendar at the top of the page showing days with journal entries (green dots) and scheduled events (purple dots)
 - **Daily Journal Entries**: Write multiple journal entries per day with timestamps
 - **Task Management**: Create and manage task checklists and to-do lists
@@ -28,6 +30,27 @@ A secure, lightweight journaling app that helps you capture daily thoughts, mana
    - Store your password securely
 3. The app will automatically migrate any existing localStorage data and encrypt it
 4. The app will request notification permissions (optional, but recommended for event reminders)
+
+### Installing as PWA
+
+The app can be installed as a Progressive Web App:
+
+**Desktop (Chrome/Edge):**
+1. Click the "Install" button in the header (when available)
+2. Or click the install icon in the address bar
+3. App will be installed and accessible from your applications menu
+
+**Mobile (Android/iOS):**
+1. Open in browser (Chrome/Safari)
+2. Tap "Add to Home Screen" from browser menu
+3. App will appear on your home screen like a native app
+
+**PWA Benefits:**
+- Works completely offline (all data local and encrypted)
+- Native app-like experience
+- No app store required
+- Automatic updates when online
+- Smaller than traditional apps
 
 ### Locking and Unlocking
 
@@ -115,10 +138,32 @@ The app automatically checks:
 ## Technical Details
 
 - **Dependencies**: Dexie v3.2.4 (loaded via CDN)
+- **PWA**: Service Worker with offline caching support
+- **Manifest**: Web App Manifest for installability
 - **Encryption**: Web Crypto API (built into modern browsers)
 - **Responsive design**: Works on desktop and mobile devices
 - **Data persistence**: IndexedDB with AES-GCM encryption
 - **Storage capacity**: 50MB+ (browser dependent)
+- **Offline**: Fully functional without internet connection
+
+## Service Worker Capabilities
+
+The service worker provides:
+
+**Caching Strategy:**
+- Cache-first for app shell (HTML, CSS, JS, Dexie library)
+- Network-first with cache fallback for dynamic content
+- Automatic cache updates on new versions
+
+**Offline Support:**
+- All app files cached for offline access
+- Database operations work without internet
+- Encrypted data remains accessible offline
+
+**Future Enhancements (placeholders included):**
+- Background sync for cloud backup
+- Push notifications for event reminders
+- Periodic background sync for data management
 
 ## Browser Compatibility
 
@@ -126,12 +171,16 @@ Works in all modern browsers that support:
 - ES6 JavaScript
 - Web Crypto API (for encryption)
 - IndexedDB API
+- Service Workers (for PWA/offline support)
+- Web App Manifest (for installation)
 - Notification API (optional, for enhanced notifications)
 
 Tested on:
 - Chrome/Edge 80+
 - Firefox 75+
 - Safari 14+
+
+Note: PWA installation experience varies by browser and platform.
 
 ## Privacy
 
