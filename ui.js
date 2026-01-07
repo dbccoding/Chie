@@ -353,26 +353,26 @@ function getSentimentColor(sentiment) {
     
     // High pleasure + high arousal (excited/joyful)
     if (pleasure > 0.3 && arousal > 0.3) {
-        return '#FFF4D6'; // Warmer, more golden
+        return '#fce5a7ff'; // Warmer, more golden
     }
     
     // High pleasure + low arousal (calm/content)
     if (pleasure > 0.3 && arousal < -0.2) {
-        return '#FFEEE0'; // Softer peach
+        return '#f3c8a5ff'; // Softer peach
     }
     
     // Low pleasure + high arousal (anxious/stressed)
     if (pleasure < -0.3 && arousal > 0.3) {
-        return '#E8DFF5'; // More noticeable lavender
+        return '#e1cefcff'; // More noticeable lavender
     }
     
     // Low pleasure + low arousal (sad/depressed)
     if (pleasure < -0.3 && arousal < -0.2) {
-        return '#E0EBF5'; // Clearer blue-gray
+        return '#c7e0f7ff'; // Clearer blue-gray
     }
     
     // Neutral/mixed
-    return '#F5F7FA'; // Slightly cooler neutral
+    return '#e4e4ddff'; // Slightly cooler neutral
 }
 
 function getCoachMessage(sentiment) {
